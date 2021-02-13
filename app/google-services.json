@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "518774130035",
+    "firebase_url": "https://lipton-app-a1b3a-default-rtdb.firebaseio.com",
+    "project_id": "lipton-app-a1b3a",
+    "storage_bucket": "lipton-app-a1b3a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518774130035:android:dd5b7c79fe6fbee9e8f106",
+        "android_client_info": {
+          "package_name": "com.first.liptonapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "518774130035-0vsg6s44f6r64iltc7vo1jkbntvr3226.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.first.liptonapp",
+            "certificate_hash": "fe7c1cdf858b50eb768733d5ec5d737d93f0e11d"
+          }
+        },
+        {
+          "client_id": "518774130035-2u2imjq7nqa2gf86ru53mov2vuepa0f4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZsmBlT9KM3hnHikDUdnYfMgMzQ96ml4A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "518774130035-2u2imjq7nqa2gf86ru53mov2vuepa0f4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
