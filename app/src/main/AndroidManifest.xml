@@ -9,29 +9,31 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:requestLegacyExternalStorage="true">
-        <activity android:name=".FifthScreen"></activity>
-        <activity android:name=".FourthScreen" />
-        <activity android:name=".SecondScreen" />
-        <activity android:name=".FirstScreen">
+        android:theme="@style/AppTheme">
+        <activity android:name=".User_Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".FifthScreen" />
+        <activity android:name=".FourthScreen" />
+        <activity android:name=".SecondScreen" />
+        <activity android:name=".FirstScreen" />
+
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.first.liptonapp.fileprovider"
-            android:grantUriPermissions="true"
-            android:exported="false">
+            android:exported="false"
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
-
+                android:resource="@xml/provider_paths" />
         </provider>
 
         <service
