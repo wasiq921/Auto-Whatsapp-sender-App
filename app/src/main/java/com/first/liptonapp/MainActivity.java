@@ -1,10 +1,12 @@
 package com.first.liptonapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import android.accessibilityservice.AccessibilityService;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.text.TextUtils;
@@ -35,6 +37,8 @@ import com.obsez.android.lib.filechooser.ChooserDialog;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
     public Button button_whatsapp;
     public EditText Enter_Friend_Name;
     public Button button_attachment;
+    public Button button_viewData;
+
+
     //Member member;
 
     @Override
@@ -61,8 +68,11 @@ public class MainActivity extends AppCompatActivity {
         Enter_Email = (EditText) findViewById(R.id.Enter_Email);
         Enter_Age = (EditText) findViewById(R.id.Enter_Age);
         Enter_Friend_Name = (EditText) findViewById(R.id.Enter_Friend_Name);
+        button_viewData = (Button) findViewById(R.id.button_viewData);
 
         button_whatsapp = findViewById(R.id.button_whatsapp);
+
+
        // button_attachment = findViewById(R.id.button_attachment);
 
       //  member = new Member();
@@ -120,8 +130,15 @@ public class MainActivity extends AppCompatActivity {
 
 
             DBManager sqLiteDatabase = new DBManager(this);
-            String res = sqLiteDatabase.addRecord(Enter_Name.getText().toString(),Enter_Mobile_Number.getText().toString()
+            boolean res = sqLiteDatabase.addRecord(Enter_Name.getText().toString(),Enter_Mobile_Number.getText().toString()
                     ,Enter_Email.getText().toString(),Enter_Age.getText().toString(),Enter_Friend_Name.getText().toString());
+
+        if (res = true){
+            Toast.makeText(MainActivity.this,"Data Inserted",Toast.LENGTH_LONG).show();
+
+        }else {
+            Toast.makeText(MainActivity.this,"Data Not Inserted",Toast.LENGTH_LONG).show();
+        }
 
             String Mobile_Number = Enter_Mobile_Number.getText().toString();
             String Name = Enter_Name.getText().toString();
@@ -185,6 +202,47 @@ public class MainActivity extends AppCompatActivity {
 
                 /*String message = "My Name is Wasiq" + Enter_Mobile_Number.getText().toString();
                 MySendSMSservice.startActionWHATSAPP(getApplicationContext(), Enter_Mobile_Number, message);*/
+    }
+
+
+            public void viewData(View v) {
+                DBManager sqLiteDatabase = new DBManager(this);
+                Cursor result = sqLiteDatabase.getAllData();
+                if(result.getCount()==0){                     //when there is no data show message..error message is depend on  "showMessage"method
+                    //show message
+                    showMessage("Error","Nothing Found");
+                    return;
+
+                }
+                StringBuffer buffer=new StringBuffer();
+
+                while(result.moveToNext()){                                               //read and collect data in database in coloum
+                    buffer.append("ID :"+ result.getString(0)+"\n");
+                    buffer.append("Name :"+ result.getString(1)+"\n");
+                    buffer.append("MobileNumber :"+ result.getString(2)+"\n");
+                   buffer.append("Email :"+ result.getString(3)+"\n");
+                    buffer.append("Age :"+ result.getString(4)+"\n");
+                    buffer.append("Friend Name :"+ result.getString(5)+"\n\n");
+                    //   buffer.append("Date :"+ res.getString(4)+"\n\n");
+
+
+                }
+                //show all data
+                showMessage("Data of Database",buffer.toString());                  //show all data in list.list is depnd on  "showMessage"method
+            }
+
+
+
+
+
+
+    public void showMessage(String title1,String Message1){                   //show message method
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title1);
+        builder.setMessage(Message1);
+        builder.show();
+
     }
 
         private boolean isAccessibilityOn (Context context, Class < ? extends

@@ -101,20 +101,37 @@
 
     <Button
         android:id="@+id/button_whatsapp"
-        android:layout_width="234dp"
-        android:layout_height="70dp"
+        android:layout_width="191dp"
+        android:layout_height="72dp"
         android:layout_marginStart="62dp"
         android:layout_marginLeft="62dp"
         android:background="@color/ButtonColor"
+        android:onClick="onClick"
         android:text="NEXT"
         android:textSize="28sp"
-        android:onClick="onClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.389"
+        app:layout_constraintHorizontal_bias="0.197"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Enter_Friend_Name"
-        app:layout_constraintVertical_bias="0.08" />
+        app:layout_constraintVertical_bias="0.129" />
+
+    <Button
+        android:id="@+id/button_viewData"
+        android:layout_width="191dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="62dp"
+        android:layout_marginLeft="62dp"
+        android:background="@color/ButtonColor"
+        android:text="View Data"
+        android:onClick="viewData"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.847"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Enter_Friend_Name"
+        app:layout_constraintVertical_bias="0.132" />
 
     <ImageView
         android:id="@+id/imageView2"

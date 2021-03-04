@@ -2,13 +2,17 @@ package com.first.liptonapp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class DBManager extends SQLiteOpenHelper {
-    private static final String dbname = " Users.db";
+    public static final String dbname = " Users.db";
     public DBManager( Context context) {
         super(context, dbname, null, 1);
     }
@@ -16,7 +20,8 @@ public class DBManager extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        String query="create table tbl_users (id integer primary key autoincrement, name text, mobile text, email text, age text, friend text)";
+        String query="create table tbl_users (id integer primary key autoincrement,name text, mobile text, email text, age text, friend text)";
+        // update table fields for data and time
         sqLiteDatabase.execSQL(query);
 
     }
@@ -28,10 +33,12 @@ public class DBManager extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public String addRecord (String name, String mobile, String email, String age, String friend){
+    public boolean addRecord (String name, String mobile, String email, String age, String friend){
+
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
 
         ContentValues cv = new ContentValues();
+
         cv.put("name", name);
         cv.put("mobile", mobile);
         cv.put("email", email);
@@ -40,14 +47,17 @@ public class DBManager extends SQLiteOpenHelper {
 
         long res = sqLiteDatabase.insert("tbl_users",null,cv);
         if(res==-1)
-            return "Failed";
+            return false;
         else
-            return "Successfully Inserted";
+            return true;
 
     }
-    public void viewRecord(SQLiteDatabase sqLiteDatabase){
-        String query = "SELECT * FROM Users.db";
-         sqLiteDatabase.execSQL(query);
+
+    public Cursor getAllData(){
+        //get all data
+        SQLiteDatabase sqLiteDatabase=this.getWritableDatabase();
+        Cursor result=sqLiteDatabase.rawQuery("SELECT * FROM tbl_users",null);
+        return result;
 
     }
 
