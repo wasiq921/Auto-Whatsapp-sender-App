@@ -3,9 +3,9 @@ package com.first.liptonapp;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -31,6 +31,7 @@ public class FifthScreen extends AppCompatActivity {
         setContentView(R.layout.activity_fifth_screen);
         export_data  = (Button) findViewById(R.id.export_data);
 
+        //permission for file READ_EXTERNAL_STORAGE and WRITE_EXTERNAL_STORAGE
         try {
 
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -53,7 +54,7 @@ public class FifthScreen extends AppCompatActivity {
             public void onClick(View view) {
                 // Export SQLite DB as EXCEL FILE
                 sqliteToExcel = new SQLiteToExcel(getApplicationContext(), DBManager.dbname, directory_path);
-                sqliteToExcel.exportAllTables("student.xls", new SQLiteToExcel.ExportListener() {
+                sqliteToExcel.exportAllTables("data.xls", new SQLiteToExcel.ExportListener() {
                     @Override
                     public void onStart() {
 
@@ -74,8 +75,18 @@ public class FifthScreen extends AppCompatActivity {
                 });
 
                 try {
+                    GMailSender sender = new GMailSender("username@gmail.com", "password");
+                    sender.sendMail("This is Subject",
+                            "This is Body",
+                            "user@gmail.com",
+                            "user@yahoo.com");
+                } catch (Exception e) {
+                    Log.e("SendMail", e.getMessage(), e);
+                }
 
-                    String filelocation= Environment.getExternalStorageDirectory().getPath() + "/Backup/student.xls";
+               /* try {
+
+                    String filelocation= Environment.getExternalStorageDirectory().getPath() + "/Backup/data.xls";
                     Intent intent = new Intent(Intent.ACTION_SENDTO);
                     intent.setType("text/plain");
                     String message="File to be shared is .";
@@ -88,7 +99,7 @@ public class FifthScreen extends AppCompatActivity {
                     startActivity(intent);
                 } catch(Exception e)  {
                     System.out.println("is exception raises during sending mail"+e);
-                }
+                }*/
 
 
             }
